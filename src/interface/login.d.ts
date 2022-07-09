@@ -6,6 +6,12 @@ declare namespace LOGIN {
   type IndexStackParams = {
     Root: undefined | String;
     Detail: undefined;
+    Login: undefined;
+    ProductList: undefined;
+    Order: undefined;
+    AboutUS: undefined;
+    AccountManager: undefined;
+    AddressManager: undefined;
   };
   interface LoginToken {
     tokenFlag: loginType;

@@ -4,7 +4,6 @@ import {Text, View} from 'react-native';
 import styles from '@/assets/styles/index.styles';
 const HeaderTitle: React.FC<any> = (props: any) => {
   let {title} = props;
-  console.log(title, 'tit');
   return (
     <View style={styles.goodHeader}>
       <Text style={{color: '#1baeae'}}>{title.tip}</Text>

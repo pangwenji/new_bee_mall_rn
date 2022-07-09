@@ -36,8 +36,8 @@ const SnapCarousels: React.FC<any> = (props: any) => {
         // contentContainerCustomStyle={styles.sliderContentContainer}
         loop={true}
         loopClonesPerSide={2}
-        // autoplayDelay={500}
-        // autoplayInterval={3000}
+        autoplayDelay={100}
+        autoplayInterval={3000}
         onSnapToItem={onSnapToItem}
         removeClippedSubviews={false}
       />

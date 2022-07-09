@@ -23,7 +23,6 @@ const _renderItem = ({item}: any) => {
   );
 };
 const Advertisement: React.FC<any> = (props: any) => {
-  console.log(props, '数据1');
   let {refashData} = props;
   return (
     <FlatList

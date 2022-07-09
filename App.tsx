@@ -8,15 +8,19 @@ import {Provider} from 'react-redux';
 import Navigator from '@/routes/index';
 import store from '@/store/index';
 import {StatusBar} from 'react-native';
+import {ThemeProvider} from 'react-native-elements';
+
 const App = () => {
   return (
     <Provider store={store}>
-      <Navigator />
-      <StatusBar
-        backgroundColor="transparent"
-        barStyle="dark-content"
-        translucent
-      />
+      <ThemeProvider>
+        <Navigator />
+        <StatusBar
+          backgroundColor="transparent"
+          barStyle="dark-content"
+          translucent
+        />
+      </ThemeProvider>
     </Provider>
   );
 };

@@ -1,26 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Advertisement from '@/components/advertisement';
 import SnapCarousels from '@/components/carousel';
 import Header from '@/components/header';
 import {getServerToken} from '@/store/login-slice';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, Button, ScrollView, StyleSheet} from 'react-native';
 import styles from '@/assets/styles/index.styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import HeaderTitle from '@/components/header-title';
 import NewGood from '@/components/new-good';
+import {fetchHomeServiceData} from '@/store/home-slice';
+import {useAppSelector} from '@/store/index';
 interface refashDataProps {
   name: string;
   imgUrl: string;
   categoryId: number;
 }
-const HomeScreen = (_props: any) => {
+const HomeScreen: React.FC<any> = (_props: any) => {
+  let {navigation} = _props;
   const dispatch = useDispatch<any>();
   const getTokenData = () => {
     let tokenPlayloan = {id: 1};
     dispatch(getServerToken(tokenPlayloan));
   };
+  const getInfo = () => {
+    dispatch(fetchHomeServiceData());
+  };
+  useEffect(() => {
+    getInfo();
+  }, []);
+  let {newGoodses, hotGoodses, recommendGoodsesResult} = useAppSelector('home');
+  let carsel = useSelector<any>(state => state.carousels);
   let carouselList: Array<any> = [
     {
       id: '1',
@@ -103,7 +115,7 @@ const HomeScreen = (_props: any) => {
     <View>
       {/* 顶部 */}
       <View>
-        <Header />
+        <Header {...navigation} />
       </View>
       <ScrollView>
         {/* 轮播图 */}
@@ -112,7 +124,13 @@ const HomeScreen = (_props: any) => {
         <Advertisement refashData={refashData} />
         {/* 商品 */}
         <HeaderTitle title={{tip: '新品上线'}} />
-        <NewGood />
+        <NewGood good={newGoodses} />
+        {/* 热门商品 */}
+        <HeaderTitle title={{tip: '热门商品'}} />
+        <NewGood good={hotGoodses} />
+        {/* 热门商品 */}
+        <HeaderTitle title={{tip: '最新商品'}} />
+        <NewGood good={recommendGoodsesResult} />
       </ScrollView>
     </View>
   );
